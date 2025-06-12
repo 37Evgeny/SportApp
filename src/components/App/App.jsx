@@ -9,11 +9,11 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className="content container">
+      {/* <main className="content container"> */}
         <Container>
           <CardList cards={data} />
         </Container>
-      </main>
+      {/* </main> */}
       <Footer />
     </>
   );
