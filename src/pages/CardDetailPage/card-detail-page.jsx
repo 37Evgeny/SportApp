@@ -1,37 +1,36 @@
-import { useCallback } from "react"
-import api from "../../utils/api"
-import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { PostDetail } from "../../components/PostDetail/post-detail";
-import { PostContext } from "../../context/postContext";
-import { useApi } from "../../hooks/useApi";
-import { isLiked } from "../../utils/post"
+import { useParams, useNavigate } from "react-router-dom";
+import CardDetail from "../../components/CardDetail/card-detail";
+import { data } from "../../assets/data";
+import { useState } from "react";
 
-export const PostDetailPage = () => {
+export const CardDetailPage = () => {
+  const { cardId } = useParams();
+  const card = data.find(item => item.id === cardId); // сравнение строк
+  const navigate = useNavigate();
 
-  const {postId} = useParams()
-  const {handleLike} = useContext(PostContext);
-  const handleGetPost = useCallback (()=> api.getPostById(postId), [postId]);
+    const [isOpen, setIsOpen] = useState(true); // или другое состояние, если нужно
 
-  const {
-    data: post,
-    setData: setPost,
-    error: errorState
-  } =useApi(handleGetPost)
+  const handleClose = () => {
+    // например, закрыть страницу или перейти назад
+    navigate('/cardlist');
+    // Или можно использовать navigate из react-router-dom для возврата
+    // import { useNavigate } from 'react-router-dom';
+    // const navigate = useNavigate();
+    // navigate(-1);
+  };
 
-  // Фунkция установки лайка 
-  const handlePostLike = useCallback(()=>{
-    handleLike(post)
-    .then((updatePost)=>{
-      console.log(updatePost)
-      setPost(updatePost);
-    })
-  },[post, handleLike, setPost]) 
+  if (!isOpen) {
+    // Можно вернуть null или перенаправить
+    return null;
+  }
 
+  if (!card) {
+    return <div>Пост не найден</div>;
+  }
 
-    return (
-        <>
-             <PostDetail {...post} setPost={setPost} onPostLike={handlePostLike}/>
-        </>
-    )
-}
+  return (
+    <>
+      <CardDetail post={card} onClose={handleClose}/>
+    </>
+  );
+};

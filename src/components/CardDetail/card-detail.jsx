@@ -12,13 +12,14 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function PostDetail({ post, onClose }) {
+export default function CardDetail({ post, onClose }) {
   const {
     title,
-    text,
     description,
     plan,
   } = post;
+
+  
 
   return (
     <Card

@@ -1,24 +1,28 @@
 import { Container } from "@mui/material";
 import Header from "../Header/header";
-import CardList from "../CardList/cardlist";
 import { data } from "../../assets/data";
-import { post } from "../../assets/post";
-import BasicRating from "../Rating/rating";
 import Footer from "../Footer/footer";
-import PostDetail from "../CardDetail/card-detail";
+import { CardContext } from '../../context/cardContext';
+import { NotFoundPage } from "../../pages/NotFoundPage/not-found-page";
+import { CardListPage } from "../../pages/CardListPage/card-list-page";
+import { CardDetailPage } from "../../pages/CardDetailPage/card-detail-page"
+import { Routes, Route } from 'react-router-dom';
 
-const App = () => {
+function App() {
   return (
-    <>
+    <CardContext.Provider value={{ data }}>
       <Header />
       <main className="content container">
         <Container>
-          {/* <CardList cards={data} /> */}
-          <PostDetail post={post[0]}/>
+          <Routes>
+            {/* Исправленный Route для index */}
+           <Route path="/cardlist" element={<CardListPage />} />
+            <Route path='/card/:cardId' element={<CardDetailPage/>} />
+          </Routes>
         </Container>
       </main>
       <Footer />
-    </>
+    </CardContext.Provider>
   );
 };
 

@@ -1,15 +1,15 @@
 import { Container } from "@mui/material";
-import { useContext } from "react";
-import PostList from "../../components/PostList/post-list";
-import { PostContext } from "../../context/postContext"
+import CardList from "../../components/CardList/cardlist";
+import { CardContext } from "../../context/cardContext";
+import { useContext } from "react"; 
 
 
-export const PostListPage =()=>{
-    const {posts} = useContext(PostContext)
+export const CardListPage =()=>{
+    const { data } = useContext(CardContext);
     return(
         <>
             <Container>
-                <PostList posts = {posts} />
+                <CardList data = {data}/>
             </Container>
         </>
     )

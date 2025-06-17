@@ -1,8 +1,13 @@
 import { Box, Grid, Button } from "@mui/material"; // добавьте Grid сюда
 import Post from "../Card/card";
 import * as React from 'react';
+import { useContext } from 'react';
+import { CardContext } from '../../context/cardContext';
 
-const PostList = ({ cards }) => {
+const CardList = () => {
+
+     const { data } = useContext(CardContext);
+
   const [expandedId, setExpandedId] = React.useState(null);
 
   const handleToggle = (id) => {
@@ -11,22 +16,6 @@ const PostList = ({ cards }) => {
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-      
-      {/* Левый toolbar */}
-      <Box
-        sx={{
-          width: 200,
-          bgcolor: 'background.paper',
-          p: 2,
-          borderRight: '1px solid #ccc',
-          height: '100%',
-          boxSizing: 'border-box',
-        }}
-      >
-        <h3>Toolbar</h3>
-        <Button variant="contained" fullWidth>Кнопка 1</Button>
-        <Button variant="contained" fullWidth>Кнопка 2</Button>
-      </Box>
 
       {/* Основной контент */}
       <Box
@@ -38,9 +27,10 @@ const PostList = ({ cards }) => {
         }}
       >
         <Grid container spacing={2} wrap="wrap">
-          {cards.map((card) => (
+          {data.map((card) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
               <Post
+              id={card.id}
                 image={card.image}
                 title={card.title}
                 text={card.text}
@@ -57,4 +47,4 @@ const PostList = ({ cards }) => {
   );
 };
 
-export default PostList;
+export default CardList;

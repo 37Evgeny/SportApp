@@ -2,11 +2,14 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicRating from '../Rating/rating';
 import { Card, CardContent, CardMedia, Typography, IconButton, Collapse } from '@mui/material';
+import { Link } from "react-router-dom";
 
 
-export default function Post({ image, title, text, rating, isExpanded, onToggle }) {
+export default function Post({ id, image, title, text, rating, isExpanded, onToggle }) {
+   console.log('Rendering Post with id:', id);
   return (
-    <Card sx={{ maxWidth: 345, position: 'relative', marginBottom: 2 }}>
+    <Link to={`/card/${id}`} style={{ textDecoration: 'none' }}>
+       <Card sx={{ maxWidth: 345, position: 'relative', marginBottom: 2 }}>
       <CardMedia
         component="img"
         height="400"
@@ -49,5 +52,7 @@ export default function Post({ image, title, text, rating, isExpanded, onToggle 
         </CardContent>
       </Collapse>
     </Card>
+    </Link>
+   
   );
 }
