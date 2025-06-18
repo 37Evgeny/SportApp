@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography, Rating } from '@mui/material';
 
 export default function BasicRating({value}) {

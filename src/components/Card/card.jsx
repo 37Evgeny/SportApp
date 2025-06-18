@@ -1,25 +1,30 @@
-
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BasicRating from '../Rating/rating';
 import { Card, CardContent, CardMedia, Typography, IconButton, Collapse } from '@mui/material';
 import { Link } from "react-router-dom";
 
-
 export default function Post({ id, image, title, text, rating, isExpanded, onToggle }) {
-   console.log('Rendering Post with id:', id);
+  console.log('Rendering Post with id:', id);
   return (
-    <Link to={`/card/${id}`} style={{ textDecoration: 'none' }}>
-       <Card sx={{ maxWidth: 345, position: 'relative', marginBottom: 2 }}>
-      <CardMedia
-        component="img"
-        height="400"
-        image={image}
-        alt={`Изображение ${title}`}
-      />
+    <Card sx={{ maxWidth: 345, position: 'relative', marginBottom: 2 }}>
+      
+      {/* Оборачиваем только изображение и заголовок в Link */}
+      <Link to={`/card/${id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <CardMedia
+          component="img"
+          height="400"
+          image={image}
+          alt={`Изображение ${title}`}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {title}
+          </Typography>
+        </CardContent>
+      </Link>
+      
+      {/* Rating всегда отображается */}
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title}
-        </Typography>
         <BasicRating value={rating} />
       </CardContent>
 
@@ -52,7 +57,5 @@ export default function Post({ id, image, title, text, rating, isExpanded, onTog
         </CardContent>
       </Collapse>
     </Card>
-    </Link>
-   
   );
 }

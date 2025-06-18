@@ -1,5 +1,5 @@
 import CloseIcon from "@mui/icons-material/Close"; // иконка закрытия
-import BasicRating from "../Rating/rating"; // ваш компонент рейтинга
+
 import {
   Card,
   CardContent,
@@ -19,7 +19,7 @@ export default function CardDetail({ post, onClose }) {
     plan,
   } = post;
 
-  
+
 
   return (
     <Card

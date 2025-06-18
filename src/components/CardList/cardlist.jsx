@@ -1,13 +1,11 @@
-import { Box, Grid, Button } from "@mui/material"; // добавьте Grid сюда
+import { Box, Grid } from "@mui/material"; // добавьте Grid сюда
 import Post from "../Card/card";
 import * as React from 'react';
 import { useContext } from 'react';
 import { CardContext } from '../../context/cardContext';
 
 const CardList = () => {
-
-     const { data } = useContext(CardContext);
-
+  const { data } = useContext(CardContext);
   const [expandedId, setExpandedId] = React.useState(null);
 
   const handleToggle = (id) => {
@@ -16,21 +14,12 @@ const CardList = () => {
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-
-      {/* Основной контент */}
-      <Box
-        sx={{
-          flexGrow: 1,
-          p: 2,
-          overflowY: 'auto',
-          height: '100%',
-        }}
-      >
-        <Grid container spacing={2} wrap="wrap">
+      <Box sx={{ flexGrow: 1, p: 2, overflowY: 'auto', height: '100%' }}>
+        <Grid container spacing={2} columns={12}>
           {data.map((card) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={card.id}>
+            <Grid key={card.id}>
               <Post
-              id={card.id}
+                id={card.id}
                 image={card.image}
                 title={card.title}
                 text={card.text}
@@ -42,7 +31,6 @@ const CardList = () => {
           ))}
         </Grid>
       </Box>
-
     </Box>
   );
 };
