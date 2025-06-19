@@ -130,32 +130,34 @@ export default function CardDetail({ post, onClose }) {
               </>
             )}
 
-            {/* Аккордеон для каждого упражнения */}
-            {plan.workoutsDetails && Object.keys(plan.workoutsDetails).map((workoutName) => (
-              <Box key={workoutName} sx={{ mb:3 }}>
-                {/* Можно оставить название тренировки как заголовок или убрать */}
-                {/* Для примера — просто список упражнений в аккордеоне */}
-                {plan.workoutsDetails[workoutName].map((exercise, idx) => (
-                  <Accordion key={idx} sx={{ mb:'8px' }}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls={`exercise-${idx}-content`}
-                      id={`exercise-${idx}-header`}
-                    >
-                      <Typography variant="subtitle1">{exercise.name}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      {/* Детали упражнения */}
-                      <Typography variant="body2" style={{ whiteSpace:'pre-line' }}>
-                        {`Количество подходов:${exercise.setsRange[0]}-${exercise.setsRange[1]} подходов\n` +
-                         `Повторения в подходе:${exercise.repsRange[0]}-${exercise.repsRange[1]}` +
-                         (exercise.description ? `\nОписание:\n${exercise.description}` : '')}
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                ))}
-              </Box>
-            ))}
+           {plan.workoutsDetails && Object.keys(plan.workoutsDetails).map((dayName) => (
+  <Box key={dayName} sx={{ mb: 3 }}>
+    {/* Название дня */}
+    <Typography variant="h6" sx={{ mb: 1, fontWeight: 'bold' }}>
+      {dayName}
+    </Typography>
+    {/* Упражнения в этот день */}
+    {plan.workoutsDetails[dayName].map((exercise, idx) => (
+      <Accordion key={idx} sx={{ mb: '8px' }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls={`exercise-${dayName}-${idx}-content`}
+          id={`exercise-${dayName}-${idx}-header`}
+        >
+          <Typography variant="subtitle1">{exercise.name}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography style={{ whiteSpace: 'pre-line' }}>
+            {`Количество подходов: ${exercise.setsRange[0]}-${exercise.setsRange[1]}\n` +
+             `Повторения в подходе: ${exercise.repsRange[0]}-${exercise.repsRange[1]}` +
+             (exercise.description ? `\nОписание:\n${exercise.description}` : '')}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    ))}
+  </Box>
+))}
+            
           </>
         )}
       </CardContent>
