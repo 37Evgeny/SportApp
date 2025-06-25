@@ -10,41 +10,35 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function CardDetail({ post, onClose }) {
-  const {
-    title,
-    description,
-    plan,
-  } = post;
-
-
+  const { title, description, plan } = post;
 
   return (
     <Card
       sx={{
-        width: { xs: '90%', sm: '80%', md: '70%' },
+        width: { xs: "90%", sm: "80%", md: "70%" },
         maxWidth: 800,
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         borderRadius: 2,
         boxShadow: 3,
-        position: 'relative',
-        margin: 'auto',
+        position: "relative",
+        margin: "auto",
       }}
     >
       {/* Кнопка закрытия */}
       <IconButton
         onClick={onClose}
         sx={{
-          position: 'absolute',
+          position: "absolute",
           top: 8,
           right: 8,
-          backgroundColor: 'rgba(255,255,255,0.7)',
-          '&:hover': {
-            backgroundColor: 'rgba(255,255,255,0.9)',
+          backgroundColor: "rgba(255,255,255,0.7)",
+          "&:hover": {
+            backgroundColor: "rgba(255,255,255,0.9)",
           },
           zIndex: 10,
         }}
@@ -56,7 +50,7 @@ export default function CardDetail({ post, onClose }) {
       <CardContent
         sx={{
           padding: 3,
-          overflowY: 'auto',
+          overflowY: "auto",
           flexGrow: 1,
         }}
       >
@@ -65,7 +59,7 @@ export default function CardDetail({ post, onClose }) {
           gutterBottom
           variant="h4"
           component="div"
-          sx={{ mb: 2, fontWeight: 'bold', textAlign: 'center' }}
+          sx={{ mb: 2, fontWeight: "bold", textAlign: "center" }}
         >
           {title}
         </Typography>
@@ -78,7 +72,7 @@ export default function CardDetail({ post, onClose }) {
               whiteSpace: "pre-line",
               mb: 3,
               paddingX: 1,
-              backgroundColor: '#f5f5f5',
+              backgroundColor: "#f5f5f5",
               borderRadius: 1,
               paddingY: 1,
             }}
@@ -93,7 +87,7 @@ export default function CardDetail({ post, onClose }) {
             <Typography
               variant="h6"
               gutterBottom
-              sx={{ mt: 4, mb: 2, fontWeight:'bold' }}
+              sx={{ mt: 4, mb: 2, fontWeight: "bold" }}
             >
               План тренировки:
             </Typography>
@@ -101,63 +95,69 @@ export default function CardDetail({ post, onClose }) {
             {/* Общие рекомендации */}
             {plan.weeklySchedule && (
               <>
-                <Box sx={{ mb:2 }}>
+                <Box sx={{ mb: 2 }}>
                   <Typography variant="body2" gutterBottom>
-                    Частота тренировок в неделю:{' '}
+                    Частота тренировок в неделю:{" "}
                     <strong>{plan.frequencyPerWeek}</strong> раз(а)
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Время отдыха между подходами:{' '}
+                    Время отдыха между подходами:{" "}
                     <strong>{plan.restBetweenSets}</strong>
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    Время отдыха между упражнениями:{' '}
+                    Время отдыха между упражнениями:{" "}
                     <strong>{plan.restBetweenExercises}</strong>
                   </Typography>
                 </Box>
 
                 {/* Расписание по дням недели */}
-                <Box sx={{ mb:3 }}>
+                <Box sx={{ mb: 3 }}>
                   <Typography variant="body2" gutterBottom>
                     Расписание:
                   </Typography>
                   {plan.weeklySchedule.map((dayInfo, index) => (
                     <Typography key={index} variant="body2" sx={{ ml: 2 }}>
-                      {dayInfo.day}: {dayInfo.workoutName || 'Отдых'}
+                      {dayInfo.day}: {dayInfo.workoutName || "Отдых"}
                     </Typography>
                   ))}
                 </Box>
               </>
             )}
 
-           {plan.workoutsDetails && Object.keys(plan.workoutsDetails).map((dayName) => (
-  <Box key={dayName} sx={{ mb: 3 }}>
-    {/* Название дня */}
-    <Typography variant="h6" sx={{ mb: 1, fontWeight: 'bold' }}>
-      {dayName}
-    </Typography>
-    {/* Упражнения в этот день */}
-    {plan.workoutsDetails[dayName].map((exercise, idx) => (
-      <Accordion key={idx} sx={{ mb: '8px' }}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls={`exercise-${dayName}-${idx}-content`}
-          id={`exercise-${dayName}-${idx}-header`}
-        >
-          <Typography variant="subtitle1">{exercise.name}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography style={{ whiteSpace: 'pre-line' }}>
-            {`Количество подходов: ${exercise.setsRange[0]}-${exercise.setsRange[1]}\n` +
-             `Повторения в подходе: ${exercise.repsRange[0]}-${exercise.repsRange[1]}` +
-             (exercise.description ? `\nОписание:\n${exercise.description}` : '')}
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-    ))}
-  </Box>
-))}
-            
+            {plan.workoutsDetails &&
+              Object.keys(plan.workoutsDetails).map((dayName) => (
+                <Box key={dayName} sx={{ mb: 3 }}>
+                  {/* Название дня */}
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
+                    {dayName}
+                  </Typography>
+                  {/* Упражнения в этот день */}
+                  {plan.workoutsDetails[dayName].map((exercise, idx) => (
+                    <Accordion key={idx} sx={{ mb: "8px" }}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls={`exercise-${dayName}-${idx}-content`}
+                        id={`exercise-${dayName}-${idx}-header`}
+                      >
+                        <Typography variant="subtitle1">
+                          {exercise.name}
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        {exercise.setsRange && exercise.repsRange && (
+                          <Typography style={{ whiteSpace: "pre-line" }}>
+                            {`Количество подходов: ${exercise.setsRange[0]}-${exercise.setsRange[1]}\n` +
+                              `Повторения в подходе: ${exercise.repsRange[0]}-${exercise.repsRange[1]}` +
+                              (exercise.description
+                                ? `\nОписание:\n${exercise.description}`
+                                : "")}
+                          </Typography>
+                        )}
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+                </Box>
+              ))}
           </>
         )}
       </CardContent>
