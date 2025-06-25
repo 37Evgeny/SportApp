@@ -144,13 +144,23 @@ export default function CardDetail({ post, onClose }) {
                         </Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                        {exercise.setsRange && exercise.repsRange && (
+                        {(exercise.setsRange ||
+                          exercise.repsRange ||
+                          exercise.description) && (
                           <Typography style={{ whiteSpace: "pre-line" }}>
-                            {`Количество подходов: ${exercise.setsRange[0]}-${exercise.setsRange[1]}\n` +
-                              `Повторения в подходе: ${exercise.repsRange[0]}-${exercise.repsRange[1]}` +
-                              (exercise.description
-                                ? `\nОписание:\n${exercise.description}`
-                                : "")}
+                            {[
+                              exercise.setsRange
+                                ? `Количество подходов: ${exercise.setsRange[0]}-${exercise.setsRange[1]}`
+                                : null,
+                              exercise.repsRange
+                                ? `Повторения в подходе: ${exercise.repsRange[0]}-${exercise.repsRange[1]}`
+                                : null,
+                              exercise.description
+                                ? `Описание:\n${exercise.description}`
+                                : null,
+                            ]
+                              .filter(Boolean)
+                              .join("\n")}
                           </Typography>
                         )}
                       </AccordionDetails>
